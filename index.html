@@ -9,29 +9,13 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
     const root = document.getElementById("root");
-    // 람다식 으로 함수 선언
-    const Title = () => (
-        <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-            Total clicks: 0
-        </h3>
-    );
-    const Button = () => (
-        <button
-            style={{
-                backgroundColor: "tomato",
-            }}
-            onClick={() => console.log("I'm clicked")}
-        >
-            Click me
-        </button>
-    );
     const Container = () => (
-        // 직접 만든 요소는 대문자 시작
         <div>
-            <Title />
-            <Button />
+            <h3>Total clicks: 0</h3>
+            <button>Click me</button>
         </div>
     );
+
     ReactDOM.render(<Container />, root); // (출력할 요소, 출력할 위치)
 
 </script>
