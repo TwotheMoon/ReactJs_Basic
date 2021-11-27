@@ -31,9 +31,14 @@ function paintToDo(newTodo) {
     const li = document.createElement("li");
     // 삭제 버튼을 위해 li 안에 span에 할일 목록 적는 형식
     const span = document.createElement("span");
+    span.innerText = newTodo;
+    // 삭제 버튼 추가
+    const button = document.createElement("button");
+    button.innerText = "X";
     // li 안에 span 배치
     li.appendChild(span);
-    span.innerText = newTodo;
+    li.appendChild(button);
+    // html에 있는 toDoList에 배치
     toDoList.appendChild(li);
 }
 
