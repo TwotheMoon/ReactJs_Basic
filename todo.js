@@ -1,28 +1,20 @@
-const clock = document.getElementById("clock");
-
-function getClock() {
-    const date = new Date();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = (String)(date.getSeconds()).padStart(2, "0");
-
-    clock.innerText = `${hours}:${minutes}:${seconds}`;
-}
-
-getClock();
-setInterval(getClock, 1000);
-
-
 const toDoForm = document.getElementById("todo-form");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.getElementById("todo-list");
 
 // 리스트 저장 배열
-const toDos = [];
+let toDos = [];
 
 // localStorage에 리스트 저장
 function saveToDos() {
-    localStorage.setItem("todos", toDos);
+    localStorage.setItem("todos", JSON.stringify(toDos));
+}
+
+// 삭제 버튼
+function deleteToDo(e) {
+    // event.target 클릭된 버튼에 대한 타겟 정보
+    const li = (e.target.parentElement);
+    li.remove();
 }
 
 // 핳일 리스트 폼
@@ -32,7 +24,7 @@ function handleToDoSubmit(e) {
     toDoInput.value = "";
     toDos.push(newTodo);
     paintToDo(newTodo);
-    saveToDos();
+    savedToDos();
 }
 
 // 할일 리스트 출력
@@ -53,11 +45,16 @@ function paintToDo(newTodo) {
     toDoList.appendChild(li);
 }
 
-// 삭제 버튼
-function deleteToDo(e) {
-    // event.target 클릭된 버튼에 대한 타겟 정보
-    const li = (e.target.parentElement);
-    li.remove();
-}
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
+
+const savedToDos = localStorage.getItem("todos");
+// 배열 형태 스트링으로 변환
+if (savedToDos !== null) {
+    const parsedToDos = JSON.parse(savedToDos);
+    // 기존 베열에 리스트 복원
+    toDos = parsedToDos;
+    // 배열 안 각각의 값에 적용
+    parsedToDos.forEach(paintToDo);
+}
+
