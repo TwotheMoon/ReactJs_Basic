@@ -14,8 +14,11 @@ function saveToDos() {
 function deleteToDo(e) {
     // event.target 클릭된 버튼에 대한 타겟 정보
     const li = (e.target.parentElement);
-    console.log(li.id);
     li.remove();
+    // 삭제할 요소의 id 값으로 해당 리스트를 제외한 나머지 리스트들로 새로운 배열을 만들어 toDos 에 업데이트
+    toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
+    // 로컬스토리지에 갱신된 toDos 저장
+    saveToDos();
 }
 
 // 핳일 리스트 폼
