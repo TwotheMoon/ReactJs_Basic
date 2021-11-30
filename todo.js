@@ -14,6 +14,7 @@ function saveToDos() {
 function deleteToDo(e) {
     // event.target 클릭된 버튼에 대한 타겟 정보
     const li = (e.target.parentElement);
+    console.log(li.id);
     li.remove();
 }
 
@@ -22,18 +23,24 @@ function handleToDoSubmit(e) {
     e.preventDefault();
     const newTodo = toDoInput.value;
     toDoInput.value = "";
-    toDos.push(newTodo);
-    paintToDo(newTodo);
-    savedToDos();
+    const newTodoObj = {
+        text: newTodo,
+        // 고유 식별자 1/1000 초 값으로 id 부여
+        id: Date.now(),
+    };
+    toDos.push(newTodoObj);
+    paintToDo(newTodoObj);
+    saveToDos();
 }
 
 // 할일 리스트 출력
 function paintToDo(newTodo) {
     // 리스트들이 담김
     const li = document.createElement("li");
+    li.id = newTodo.id;
     // 삭제 버튼을 위해 li 안에 span에 할일 목록 적는 형식
     const span = document.createElement("span");
-    span.innerText = newTodo;
+    span.innerText = newTodo.text;
     // 삭제 버튼 추가
     const button = document.createElement("button");
     button.innerText = "❌";
