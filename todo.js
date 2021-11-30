@@ -17,12 +17,22 @@ const toDoForm = document.getElementById("todo-form");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.getElementById("todo-list");
 
+// 리스트 저장 배열
+const toDos = [];
+
+// localStorage에 리스트 저장
+function saveToDos() {
+    localStorage.setItem("todos", toDos);
+}
+
 // 핳일 리스트 폼
 function handleToDoSubmit(e) {
     e.preventDefault();
     const newTodo = toDoInput.value;
     toDoInput.value = "";
+    toDos.push(newTodo);
     paintToDo(newTodo);
+    saveToDos();
 }
 
 // 할일 리스트 출력
