@@ -34,12 +34,20 @@ function paintToDo(newTodo) {
     span.innerText = newTodo;
     // 삭제 버튼 추가
     const button = document.createElement("button");
-    button.innerText = "X";
+    button.innerText = "❌";
+    button.addEventListener("click", deleteToDo);
     // li 안에 span 배치
     li.appendChild(span);
     li.appendChild(button);
     // html에 있는 toDoList에 배치
     toDoList.appendChild(li);
+}
+
+// 삭제 버튼
+function deleteToDo(e) {
+    // event.target 클릭된 버튼에 대한 타겟 정보
+    const li = (e.target.parentElement);
+    li.remove();
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
