@@ -4,20 +4,29 @@
 <body>
     <div id="root"></div>
 </body>
+
 <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
 <script type="text/babel">
     const root = document.getElementById("root");
+    let counter = 0;
+
+    function countUp() {
+        counter = counter + 1;
+        render();
+    }
+    function render() {
+        ReactDOM.render(<Container />, root);
+    }
     const Container = () => (
         <div>
-            <h3>Total clicks: 0</h3>
-            <button>Click me</button>
+            <h3>Total Clicks : {counter}</h3>
+            <button onClick={countUp}>Click me</button>
         </div>
     );
-
-    ReactDOM.render(<Container />, root); // (출력할 요소, 출력할 위치)
-
+    render();
 </script>
 
 </html>
