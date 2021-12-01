@@ -5,38 +5,39 @@
     <div id="root"></div>
 </body>
 
-<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script type="text/babel">
-    function Btn({ text, changeValue }) {
-        console.log(text, "was rendered");
+    function Btn({ text, fontSize = 16 }) { // 기본값 부여
         return (
             <button
-                onClick={changeValue}
                 style={{
                     backgroundColor: "tomato",
                     color: "white",
                     padding: "10px 20px",
                     border: 0,
                     borderRadius: 10,
+                    fontSize,
                 }}>
                 {text}
             </button>
         );
     }
-    function ConfirmBtn() {
-        return <button>Confirm</button>
-    }
-    const MemorizedBtn = React.memo(Btn);
+    // Btn 함수로 들어가는 데이터의 타입 설명
+    Btn.propTypes = {
+        text: PropTypes.string.isRequired, // isRequired = 값이 무조건 있어야함 undefinded -> 에러
+        fontSize: PropTypes.number,
+    };
     function App() {
-        const [value, setValue] = React.useState("Save Changes");
-        const changeValue = () => setValue("Revert Changes");
-        return <div>
-            <MemorizedBtn text={value} changeValue={changeValue} />
-            <MemorizedBtn text="Continue" />
-        </div>// 컴포넌트에 onClick을 넣는다면 이벤트 리스너 X 단지 함수만 보내는것 onClick은 그저 변수명 일뿐
+        return (
+            <div>
+                <Btn text="Save Changes" fontSize={18} />
+                <Btn text="Continue" />
+            </div>
+        );
     }
     const root = document.getElementById("root");
     ReactDOM.render(<App />, root);
