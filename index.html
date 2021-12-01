@@ -15,21 +15,29 @@
         const onChange = (event) => {
             setMinutes(event.target.value);
         };
+        const reset = () => setMinutes(0);
         return (
-            // JSX를 기반으로 사용하기에 HTML 속성 class -> className, for -> htmlFor 로 사용
             <div>
-                <h1 className="hi">Super Converter</h1>
-                <label htmlFor="minutes">Minutes</label>
-                <input
-                    vlaue={minutes}
-                    id="minutes"
-                    placeholder="Minutes"
-                    type="number"
-                    onChange={onChange}
-                />
-                <h4>You want to convert {minutes}</h4>
-                <label htmlFor="hours">Minutes</label>
-                <input id="hours" placeholder="Hours" type="number" />
+                <h1>Super Converter</h1>
+                <div>
+                    <input
+                        value={minutes}
+                        id="minutes"
+                        placeholder="Minutes"
+                        type="number"
+                        onChange={onChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="hours">Hours</label>
+                    <input
+                        // 반올림
+                        value={Math.round(minutes / 60)}
+                        id="hours"
+                        placeholder="Hours"
+                        type="number" />
+                </div>
+                <button onClick={reset} >Reset</button>
             </div>
         );
     }
