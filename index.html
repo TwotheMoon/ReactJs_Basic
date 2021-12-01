@@ -15,12 +15,15 @@
         // 데이터를 담을 수 있는 배열이 담긴 함수 제공 (countUp, counter = 0; 두가지를 담음)
         const data = React.useState(0);
         // useState 에서 제공한 배열을 꺼내서 이름 붙이기
-        const [counter, modifier] = data;
-
+        const [counter, setCounter] = data;
+        const onClick = () => {
+            // reRender, 함수 적용을 위해
+            setCounter(counter + 1);
+        };
         return (
             <div>
                 <h3>Total Clicks : {counter}</h3>
-                <button onClick={modifier}>Click me</button>
+                <button onClick={onClick}>Click me</button>
             </div>
         );
     }
