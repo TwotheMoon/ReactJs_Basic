@@ -62,7 +62,7 @@
     ReactDOM.render(<App />, root);
 </script> -->
 
-<script type="text/babel">
+<!-- <script type="text/babel">
     function App() {
         const [amount, setAmount] = React.useState(0);
         const [invert, setInvert] = React.useState(false);
@@ -88,6 +88,59 @@
     }
     const root = document.getElementById("root");
     ReactDOM.render(<App />, root);
-</script>
+</script> -->
+
+<!-- <script type="text/babel">
+    function App() {
+        const [loading, setLoading] = React.useState(true);
+        const [movies, setMovies] = React.useState([]);
+        const getMovies = async () => {
+            const json = await (await fetch(
+                `https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year`
+            )).json();
+            setMovies(json.data.movies);
+            setLoading(false);
+            console.log(movies);
+        };
+        React.useEffect(() => {
+            getMovies();
+        }, [])
+        console.log(movies);
+        return (
+            <div>
+                {loading ? "Loading..." : null}
+            </div>
+        );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+</script> -->
+
+<!-- <script type="text/babel">
+    function App() {
+        const [counts, setCounts] = React.useState(0);
+        const [loading, setLoading] = React.useState(true);
+        const countUp = () => {
+            setCounts((prev) => prev + 1);
+
+        }
+
+        return (
+            <div>
+                <div>
+                    {
+                        loading ? "Loading..." :
+                            <div>
+                                <div>count : {counts}</div>
+                                <button onClick={countUp}>click({counts})</button>
+                            </div>
+                    }
+                </div>
+            </div>
+        );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+</script> -->
 
 </html>
