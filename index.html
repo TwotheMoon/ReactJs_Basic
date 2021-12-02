@@ -43,7 +43,7 @@
     ReactDOM.render(<App />, root);
 </script> -->
 
-<script type="text/babel">
+<!-- <script type="text/babel">
 
     function App() {
         const [counter, setValue] = React.useState(0);
@@ -56,6 +56,34 @@
                 <div>{counter}</div>
                 <button onClick={countUp}>click Me</button>
             </div>
+        );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+</script> -->
+
+<script type="text/babel">
+    function App() {
+        const [amount, setAmount] = React.useState(0);
+        const [invert, setInvert] = React.useState(false);
+        const onChange = (event) => {
+            setAmount(event.target.value);
+        }
+        const onInvert = () => {
+            setInvert((prev) => !prev);
+            setAmount(0);
+        }
+        return (
+            <div>
+                <h1> 단위 변환기 </h1>
+                <div>
+                    <input onChange={onChange} value={invert ? Math.round(amount * 60) : amount} placeholder="Minutes" disabled={invert}></input>
+                </div>
+                <div>
+                    <input onChange={onChange} value={invert ? amount : Math.round(amount / 60)} placeholder="Hours" disabled={!invert}></input>
+                </div>
+                <button onClick={onInvert}>{invert ? "Min To Hour" : "Hour To Min"}</button>
+            </div >
         );
     }
     const root = document.getElementById("root");
