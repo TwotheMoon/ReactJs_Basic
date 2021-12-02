@@ -10,7 +10,7 @@
 <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-<script type="text/babel">
+<!-- <script type="text/babel">
     function Btn({ text, fontSize = 16 }) { // 기본값 부여
         return (
             <button
@@ -36,6 +36,25 @@
             <div>
                 <Btn text="Save Changes" fontSize={18} />
                 <Btn text="Continue" />
+            </div>
+        );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+</script> -->
+
+<script type="text/babel">
+
+    function App() {
+        const [counter, setValue] = React.useState(0);
+        const countUp = () => {
+            setValue((current) => current + 1);
+        }
+        return (
+            <div>
+
+                <div>{counter}</div>
+                <button onClick={countUp}>click Me</button>
             </div>
         );
     }
