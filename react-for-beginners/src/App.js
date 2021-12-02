@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
 
-function Hello() {
-  useEffect(() => {
-    console.log("hi :)");
-    return () => console.log("bye :(");
-  })
-  return (
-    <h1>Hello</h1>
-  );
-}
-
 function App() {
-  const [showing, setShowing] = useState(false);
-  const onClick = () => {
-    setShowing((prev) => !prev);
-  }
+  const [toDo, setToDo] = useState("");
+  const [toDos, setToDos] = useState([]);
+  const onChange = (event) => setToDo(event.target.value);
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (toDo === "") { // 인풋 비어있으면 작동X
+      return;
+    }
+    setToDo(""); // 인풋값 초기화
+    setToDos(currentArray => [toDo, ...currentArray]); /*[새 할일, 기존[](toDos)] 을 합쳐 새로운 배열 생성하여 갱신*/
+  };
+  console.log(toDos);
   return (
     <div>
-      {showing ? <Hello /> : null}
-      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
+      <h1>My Yo Dos ({toDos.length})</h1>
+      <form onSubmit={onSubmit}>
+        <input onChange={onChange} value={toDo} type="text" placeholder="할일을 적어보세요"></input>
+        <button>Add To Do</button>
+      </form>
     </div>
   );
 }
