@@ -143,4 +143,23 @@
     ReactDOM.render(<App />, root);
 </script> -->
 
+<script type="text/babel">
+
+    function App() {
+        const [count, setCount] = React.useState(0);
+        const countUp = () => {
+            setCount((prev) => prev + 1);
+        }
+        console.log(count);
+        return (
+            <div>
+                <h1> count: {count} </h1>
+                <button onClick={countUp}>Click</button>
+            </div>
+        );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+</script>
+
 </html>

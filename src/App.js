@@ -7,7 +7,7 @@ import Detail from "./routes/Detail";
 import Home from "./routes/Home";
 
 function App() {
-  return <Router basename={process.env.PUBLIC_URL}>
+  return <Router>
     <Switch>
       <Route path="/movie/:id">
         <Detail />
